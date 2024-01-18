@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content">
+<form action="addquestion" method="post">
+    {% csrf_token %}
+
+    {{form|crispy}}
+    <p>Fields marked <b>*</b> are required</p>
+    <button type="submit" class="btn btn-info">Add Question</button>
+</form>
+<p>
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+</p>
+<div class="table">
+    <table class="table table-bordered">
+        <tr><th>Question in English</th><th>Question in Urdu</th><th>Question Type</th><th>Action</th></tr>
+        {% for q in qb %}
+        <tr><td>{{q.question_eng}}</td><td style="direction:rtl; text-align:right;" class="urdufont-right">{{q.question_urd}}</td><td >{{q.question_type}}</td><td><form class="d-inline" action="{% url 'questionpaper:approve' q.id %}" method="POST">{% csrf_token %}<input type="submit" value="Approve" class="btn btn-primary"> </form></td></tr>
+        {% endfor %}
+    </table>
+</div>
+</div>
+
+{% endblock %}

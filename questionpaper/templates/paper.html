@@ -1,0 +1,374 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+<body class="hold-transition sidebar-mini">
+
+<!-- Main Wrapper Start -->
+<div class="wrapper">
+
+  <!-- Navbar -->
+
+  
+  
+
+  
+  <!-- /.navbar -->
+
+
+  <!-- Sideabr -->
+
+  
+  
+<!-- Main Sidebar Container -->
+
+
+<script>
+  $("#view_mcqs_double").addClass('menu-open');
+  $("#view_mcqs_double > a").addClass('active');
+ $("#generated_papers").addClass('menu-open');$("#generated_papers > a").addClass('active'); </script>
+  
+  <!-- / .Sideabr -->
+  <!-- Content Wrapper. Contains page content -->
+
+<style>
+
+	hr{
+
+		margin: 3px 0;
+
+	}
+
+	.papyertype{
+
+		font-size: 24px; font-weight: bold; text-align: center;
+
+	}
+
+	label{margin-bottom:0; padding: 0; font-size: 16px; }
+
+	.heading{
+
+		font-size:35px;
+
+	}
+
+	a, a:hover{
+
+		color: #000000;
+
+	}
+
+	.content-block {
+
+		page-break-inside: avoid;
+
+	}
+
+	.content-block:nth-child(odd) {
+
+		clear: both;
+
+	}
+
+	img{
+
+		max-width: 100%;
+
+	}
+
+	@media print {
+
+    a[href]:after {
+
+        content: none !important;
+
+    }
+
+		.main-footer{
+
+		display: none;
+
+	}
+
+</style>
+
+
+
+	<!-- Main content -->
+
+	<section class="content">
+
+		<div class="card card-default color-palette-bo">
+
+			<div class="card-body" style="overflow-y: hidden">
+
+				<!-- For Messages -->
+
+				
+    <!--print error messages-->
+    
+    <!--print custom error message-->
+    
+    <!--print custom success message-->
+    
+				<!---- start here is item view filmzy --->
+
+				<!--Pilotheader-->
+
+				
+					<div class="container" style="padding:5px">
+
+						<div class="row" style="border:#000 solid 4px; position: relative; margin-bottom:5px;">
+
+							
+								<div style="position: absolute; right: 0px; top: 0px;">
+
+									<div id="qrcodeimg" style="border: 6px solid white;"></div>
+
+									<!-- <img src="</?= base_url().$paper_mcqs[0]->fp_qrcode;?>"/> -->
+
+								</div>
+
+							
+							<div class="col-lg-12 col-sm-12 heading" style="text-align:center; font-weight:bold">{% for i in user %}<img src="{{i.img.url}}" style="height: 60px; width: 50px;">{{i.institute}}{% endfor %}</div>
+
+							
+
+							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 heading">
+
+							</div>
+							
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 heading" style="text-align:center; font-weight:bold">
+
+								Physics 9
+							</div>
+
+							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+
+							</div>
+
+							
+
+							
+								<div class="col-lg-12 col-md-12 col-sm-12" style="font-size:18px; font-weight:bold; padding-top: 10px;">
+
+									<div class="row">
+
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="font-size:18px; font-weight:bold; text-align: center;">
+													Time Allowed					Total Marks
+										</div>
+
+									</div>
+
+								</div>
+
+							
+							<div class="col-lg-12 col-md-12 col-sm-12" style="font-size:18px; font-weight:bold; padding: 0 15px;">
+
+								<div class="row" style="margin-bottom:10px;">
+
+									<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2" style="font-size:18px; font-weight:bold">
+
+										School Name:
+
+									</div>
+
+									<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10" style="border-bottom:#000 solid 2px">	
+
+										xxxxxx
+
+									</div>
+
+								</div>
+
+								<div class="row form-group">
+
+									<div class="col-lg-5 col-md-5 col-sm-5" style="font-size:14px; font-weight:bold">
+
+										<div class="row">
+
+											<div class="col-xl-4 col-lg-5 col-md-4 col-sm-4">
+
+												Student Name :
+
+											</div>
+
+											<div class="col-xl-8 col-lg-7 col-md-8 col-sm-8" style="border-bottom:#000 solid 2px">
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="col-lg-4 col-md-4 col-sm-4" style="font-size:14px; font-weight:bold">
+
+										<div class="row">
+
+											<div class="col-xl-4 col-lg-5 col-md-4 col-sm-4">
+
+												Roll Number :
+
+											</div>
+
+											<div class="col-xl-8 col-lg-7 col-md-8 col-sm-8" style="border-bottom:#000 solid 2px">
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="col-lg-3 col-md-3 col-sm-3" style="font-size:14px; font-weight:bold">
+
+										<div class="row">
+
+											<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+
+												Section :
+
+											</div>
+
+											<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8" style="border-bottom:#000 solid 2px">
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				
+			
+				
+
+				<div class="container">
+
+                	<hr><div class="papyertype">SUBJECTIVE PART</div>
+		<table style="width:100%">
+
+		<div class="row">
+
+			<div class="col-lg-12 col-sm-12">                         
+
+			  <label for="group_title_en" class="col-sm-12 control-label" >Question No:  1</label>
+
+			  <div style="font-weight:bold"></div>
+
+			</div>
+
+		 </div>
+
+					
+
+
+
+		</table>
+
+				   
+					<table width="100%" style="margin-top:10px;" >
+
+					  
+					  <tr>
+
+						<td colspan="2" style="font-weight:bold">
+
+
+<ol>
+	{% for i in qbs %}                               
+<li type="a">
+	{{i.question_eng}}</li>
+	{% endfor %} 
+</ol>
+							</td>
+
+					  </tr>
+
+
+
+					  
+					</table>
+
+					
+			
+
+					
+		<table style="width:100%">
+
+		<div class="row">
+
+			<div class="col-lg-12 col-sm-12">                         
+
+			  <label for="group_title_en" class="col-sm-12 control-label" >Question No:  2</label>
+
+			  <div style="font-weight:bold"></div>
+
+			</div>
+
+		 </div>
+
+					
+
+
+
+		</table>
+
+				   
+					<table width="100%" style="margin-top:10px;" >
+
+					  
+					  <tr>
+
+						<td colspan="2" style="font-weight:bold">
+
+
+
+							                               
+
+							<ol>
+								{% for i in qbl %}                               
+							<li type="a">
+								{{i.question_eng}}</li>
+								{% endfor %} 
+							</ol>
+
+					  </tr>
+
+
+
+					  
+					</table>
+
+					
+	
+
+					
+		
+					
+                </div>
+
+				<!-- /.box-body -->
+
+			</div>
+
+		</div>
+
+        
+
+	</section>
+
+    
+
+	
+
+	
+</div>
+{% endblock %}

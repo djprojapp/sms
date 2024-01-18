@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+
+   
+
+
+    <section class="content">
+         <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">{% if user.is_authenticated %} <b>{{user.userprofile.institute}} </b>{% endif %}  Dashboard</h1>
+            </div>
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+  
+      <!-- Main content -->
+      <div class="container-fluid">  
+		  
+        <div class="row">
+          <div class="col-12">
+          <div class="info-box">  
+              <div class="info-box-content" style="font-size: 14px; font-weight: normal;">				  
+              Welcome to Question Bank  ,<br />Online              </div>
+			  <!--<div class="row"><h3><a href="https://drive.google.com/drive/folders/1REeHrElNX_a9XxF84vLTtyFULwLBJEax" target="_blank">Click here to Download Grade 1 & 2 and Grade 3 to 8 all Islamiat Nazra Papers</a></h3></div>-->
+              <!-- /.info-box-content -->
+            </div>           
+          </div>        
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-book"></i></span>
+  
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Generated Papers</span>
+                  {% for i in total %}
+                  <span class="info-box-number">{{i.total}}</span> {% endfor %}
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+                      <!-- /.col -->
+  
+            <!-- fix for small devices only -->
+            <!--<div class="clearfix hidden-md-up"></div>-->
+  
+                      <!-- /.col -->
+                      <!-- /.col -->
+          </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-12 col-lg-12 col-sm-12 col-md-12">
+              <!-- small box -->
+              <div class="small-box bg-success" style="text-align:center;">
+                <h3 style="text-align:center;">Generate Paper</h3>
+                <div class="inner" style="margin-left:30%;">
+                  
+                  <form  action="" method="post" target="_blank">
+                    {% csrf_token %}
+                    <table class="table table-borderless bg-success" style="width:50%">
+                        <tr><td>Class</td><td><select type="text" name="grade" required>
+                            <option value="">--select--</option>
+                            <option value="9">9</option>
+                        </select></td></tr>
+                        <tr><td>Subject</td><td><select type="text" name="subject" required>
+                            <option value="">--select--</option>
+                            <option value="physics">Physics</option>
+                        </select></td></tr>
+                        
+                    </table>
+            
+                 
+                </div>
+                <p>Click below for generation of New paper from Question Bank and print for use</p>
+                
+                <button aria-setsize="500px" class="btn btn-info" type="submit" class="small-box-footer" style="text-align:center; width:100%">Generate Paper<i class="fa fa-arrow-circle-right"></i></button>
+              </form>
+              <span> {% for i in messages %}{{i}}{% endfor %}</span>
+              </div>
+            </div>
+        </div>
+		  
+		  
+        
+        <!-- /.row -->
+
+ <!-- Small boxes (Stat box) -->
+ 
+        <!-- /.row -->
+        
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+
+    <!-- /.content -->
+  </div>
+    
+    </section>
+
+        {% endblock %}
+
+      

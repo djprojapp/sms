@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content">
+<form action="addmcq" method="post">
+    {% csrf_token %}
+
+    {{mcq_form|crispy}}
+    {{o_form|crispy}}
+    {{t_form|crispy}}
+    <p>Fields marked <b>*</b> are required</p>
+    <button type="submit" class="btn btn-info">Add MCQ</button>
+</form>
+<p>
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+</p>
+<div class="table">
+    <table>
+        <tr><th>MCQ</th><th>Option A</th><th>Option B</th><th>Option C</th><th>Option D</th><th>True Option</th><th>Action</th></tr>
+        {% for q in mcqs %}
+        <tr><td>{{q.trueoption.options.mcq}}</td><td>{{q.trueoption.op_a}}</td><td>{{q.trueoption.op_b}}</td><td>{{q.trueoption.op_c}}</td><td>{{q.trueoption.op_d}}</td><td>{{q.trueoption}}</td><td><button type="submit" class="btn btn-info">Approve</td></tr>
+        {% endfor %}
+    </table>
+</div>
+</div>
+
+{% endblock %}

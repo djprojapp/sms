@@ -1,0 +1,373 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Question Bank</title>
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
+
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'css/adminlte.css' %}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'css/blue.css' %}">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="{% static 'css/morris.css' %}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{% static 'css/jquery-jvectormap-1.2.2.css' %}">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="{% static 'css/datepicker3.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'css/daterangepicker-bs3.css' %}">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap3-wysihtml5.min.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- jQuery -->
+  <!-- <script src="</?= base_url()?/>assets/plugins/jquery/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style type="text/css">
+		@import url(//fonts.googleapis.com/earlyaccess/notonastaliqurdu.css); 
+
+	  @font-face {
+
+    font-family:"Jameel Noori Nastaleeq";
+
+  src:url("{% static 'fonts/JameelNooriNastaleeq.ttf' %}");
+
+  font-weight: bold;
+
+}
+
+	  
+
+.urdufont-right{
+
+   font-family: 'Jameel Noori Nastaleeq' ,'Open Sans', sans-serif;
+
+  direction: rtl;
+	font-size: 26px;
+
+}
+	  
+
+		</style>
+<style type="text/css">
+.arabic_class{
+	font-family: "Amiri script=latin rev=3"; 
+	font-weight: bold; 
+	line-height: initial;  
+}
+@import url(//fonts.googleapis.com/earlyaccess/notonastaliqurdu.css); 
+@font-face {
+    font-family:"Jameel Noori Nastaleeq";
+  src:url("{% static 'fonts/JameelNooriNastaleeq.ttf' %}");
+  font-weight: bold;
+}
+	  
+.urdufont-right{
+   font-family: 'Jameel Noori Nastaleeq' ,'Open Sans', sans-serif;
+  direction: rtl;
+ font-size:22px;
+}
+.urdufont-center{
+  font-family: 'Noto Nastaliq Urdu', serif; 
+  direction: rtl;
+  text-align:center;
+}
+	  
+	 
+.nori_font {
+font-family: 'Jameel Noori Nastaleeq' ,'Open Sans', sans-serif;
+}
+@font-face {
+  font-family:"AlQalam";
+  src:url("{% static 'fonts/Al_Qalam_Quran_Majeed_Web.ttf' %}");
+  font-weight: bold;
+}
+.alqalam_class{
+	font-family: "AlQalam"; 
+	font-weight: bold; 
+	line-height: initial;  
+}
+@font-face {
+  font-family:"AlQalam2";
+  src:url("{% static 'fonts/2AlQalamQuranPublisher.ttf' %}");
+  font-weight: bold;
+}
+.alqalam2_class{
+	font-family: "AlQalam2"; 
+	font-weight: bold; 
+	line-height: initial;  
+}	  
+</style>	
+<script src="https://cdn.ckeditor.com/4.15.1/standard-all/ckeditor.js"></script>
+	
+		<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jquery.steps.css' %}">
+        <!-- <script src="</?= base_url()?/>steps/lib/modernizr-2.6.2.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" integrity="sha512-JynkyJ/1167qkDbZ09NFUGKV3ARgnmySSzQLA1pEAnQuZqPodAD/gNhPkPjtqF5vMp4FPbILFW41Il7Zy3O+Bg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- <script src="</?= base_url()?/>steps/lib/jquery-1.9.1.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" integrity="sha512-jGR1T3dQerLCSm/IGEGbndPwzszJBlKQ5Br9vuB0Pw2iyxOy+7AK+lJcCC8eaXyz/9du+bkCy4HXxByhxkHf+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- <script src="</?= base_url()?/>steps/lib/jquery.cookie-1.3.1.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.js" integrity="sha512-FUrv64xgfOGlfNPyf0Meo0f5QP2VkrMbwkuoohNzx4tKeKKTZu6HVSZXGigSKYB7BsjUHN+MX5AtI8CRU4s0Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- <script src="</?= base_url()?/>steps/build/jquery.steps.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js" integrity="sha512-gH0SqyjTN7WJAtki1UvqOkhWi3WsF9LY05BMwdcSq6QdFDXrXeXy0q8iP0YmBXCqo7OnSgdIPrC5Vqn8/KRu/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- Google tag (gtag.js) -->
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Main Wrapper Start -->
+<div class="wrapper">
+
+  <!-- Navbar -->
+
+  
+  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'questionpaper:home' %}" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="javascript:alert('Please contact developers for Help');" class="nav-link">Contact</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'accounts:logout' %}" class="nav-link">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'accounts:register' %}" class="nav-link">Register</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'accounts:login' %}" class="nav-link">Login</a>
+      </li>
+      {% endif %}
+    </ul>
+  
+  </nav>
+
+  
+  <!-- /.navbar -->
+
+
+  <!-- Sideabr -->
+
+  
+  
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="{% url 'questionpaper:home' %}" class="brand-link">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Q_magazine_logo.svg/1200px-Q_magazine_logo.svg.png" alt="Logo" class="brand-image img-circle elevation-3"
+         style="opacity: .8">
+    <span class="brand-text font-weight-light">Question Bank</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+     
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      
+      <div class="image">
+        {% if user.is_authenticated %}
+        {% if user.userprofile.img.url %}
+        <img src="{{ user.userprofile.img.url }}" class="img-circle elevation-2" alt="User Image">
+        {% else %}
+        <img src="{% static 'images/default_pic.png' %}" class="img-circle elevation-2" alt="Default Image">
+        {% endif %}
+        {% else %}
+        <img src="{% static 'images/default_pic.png' %}" class="img-circle elevation-2" alt="Default Image">
+        {% endif %}
+      </div>
+      
+      <div class="info">           
+        <a href="#" class="d-block">{% if user.is_authenticated %}{{user.id}}-{{user.username}}<br />{{user.userprofile.institute}}{% endif %}</a>       
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+		<li id="dashboard" class="nav-item has-treeview">
+          <a href="{% url 'questionpaper:home' %}" class="nav-link">
+            <i class="nav-icon fa fa-dashboard"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>         
+        </li>
+        {% if user.is_authenticated %}
+        <li id="profile" class="nav-item has-treeview">
+          <a href="" class="nav-link">
+            <i class="nav-icon fa fa-user"></i>
+            <p>
+              Profile
+              <i class="right fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+			  <li class="nav-item" id="profile_view"> <a href="{% url 'accounts:userprofile' %}" class="nav-link"> <i class="fa fa-circle-o nav-icon"></i>
+              <p>Profile View</p>
+              </a> </li>
+            <li class="nav-item" id="change_pwd">
+              <a href="{% url 'accounts:passwordchange' %}" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>Change Password</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        <li id="add" class="nav-item has-treeview">
+          <a href="{% url 'questionpaper:home' %}" class="nav-link">
+            <i class="nav-icon fa fa-files-o"></i>
+            <p>
+              Generate New Paper
+            </p>
+          </a>
+        </li>
+                <li id="generated_papers" class="nav-item has-treeview">
+          <a href="{% url 'questionpaper:addquestion' %}" class="nav-link">
+            <i class="nav-icon fa fa-files-o"></i>
+            <p>
+              Add Questions
+            </p>
+          </a>
+        </li>
+        <li id="ethicspapers" class="nav-item has-treeview">
+          <a href="{% url 'questionpaper:addquestion' %}" class="nav-link">
+            <i class="nav-icon fa fa-files-o"></i>
+            <p>
+              Add MCQs
+            </p>
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li id="logout" class="nav-item has-treeview">
+          <a href="{% url 'accounts:logout' %}" class="nav-link">
+            <i class="nav-icon fa fa-sign-out"></i>
+            <p>
+              Logout
+            </p>
+          </a>         
+        </li>
+        {% else %}
+        <li id="logout" class="nav-item has-treeview">
+          <a href="{% url 'accounts:register' %}" class="nav-link">
+            <i class="nav-icon fa fa-user-plus"></i>
+            <p>
+              Register
+            </p>
+          </a>         
+        </li>
+        <li id="logout" class="nav-item has-treeview">
+          <a href="{% url 'accounts:login' %}" class="nav-link">
+            <i class="nav-icon fa fa-sign-in"></i>
+            <p>
+              Login
+            </p>
+          </a>         
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
+<script>
+  $("#dashboard").addClass('menu-open');
+  $("#dashboard > a").addClass('active');
+</script>
+  
+  <!-- / .Sideabr -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  {% block content %}
+  {% endblock %}
+</div>
+  <!-- /.content-wrapper -->
+
+<!-- Morris.js charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{% static 'js/morris/morris.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+<!-- jvectormap -->
+<script src="{% static 'js/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script src="{% static 'js/jquery-jvectormap-world-mill-en.js' %}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'js/jquery.knob.js' %}"></script>
+<!-- daterangepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{% static 'js/daterangepicker.js' %}"></script>
+<!-- datepicker -->
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{% static 'js/bootstrap3-wysihtml5.all.min.js' %}"></script>
+
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'js/dashboard.js' %}"></script>
+
+  <footer class="main-footer">
+    <strong>Copyright © 2024 All rights reserved.</strong>
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Developed with:</b> &#10084;
+    </div>
+  </footer>
+
+    
+
+  <!-- Control Sidebar -->
+  
+  <!-- /.control-sidebar -->
+
+  
+</div>
+<!-- ./wrapper -->
+
+
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<!-- <script src="</?= base_url() ?/>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js" integrity="sha512-zkyO5vwoG7ZddnVdPJfv8htgB8HdgQliYEY+MEehHm1FzRwpCjh1lYRXqVgYNmFEvpfg5AkE0Qpw37cUcgcvSw==" crossorigin="anonymous"></script>
+
+<!-- Slimscroll -->
+<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+<!-- FastClick -->
+<!-- <script src="</?= base_url() ?/>assets/plugins/fastclick/fastclick.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js" integrity="sha512-CWIhArE41HBbJmCKNaI+oHPt8r94Gb+qGty6KUyfl4T8ODsqhoyIm2NjGzV7js1cbvqUfrminjCjxUPLh3Wn7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- AdminLTE App -->
+<!-- <script src="</?= base_url() ?/>assets/dist/js/adminlte.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.0-alpha.2/js/adminlte.js" integrity="sha512-ybES/OrjXRzYP/6lwRc060GTsvqij6cjqIIXffLmVDRZACPdjUcZVymiwnNdbiqEthtr1ZW5KNXPHmUKJ5uZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://kit.fontawesome.com/3862731c4b.js" crossorigin="anonymous"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="</?= base_url() ?>assets/dist/js/demo.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.0-alpha.2/js/demo.js" integrity="sha512-mdCbX6qmRKMm5b0tpXQ99CEbGQNNJoALJpJq80khCkgBNUPu+3YAQHeWPcHWnHoBl9sdxf9/kvkhFqJg/UU3GA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
