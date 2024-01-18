@@ -10,7 +10,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">{% if user.is_authenticated %} <b>{{user.userprofile.institute}} </b>{% endif %}  Dashboard</h1>
+              <h1 class="m-0 text-dark">{% if user.is_authenticated %} <b>{{user.userprofile.institute}} </b>{% endif %}</h1>
             </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -61,7 +61,7 @@
                 <h3 style="text-align:center;">Generate Paper</h3>
                 <div class="inner" style="margin-left:30%;">
                   
-                  <form  action="" method="post" target="_blank">
+                  <form  action="" method="post">
                     {% csrf_token %}
                     <table class="table table-borderless bg-success" style="width:50%">
                         <tr><td>Class</td><td><select type="text" name="grade" required>
