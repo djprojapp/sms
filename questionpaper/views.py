@@ -5,11 +5,16 @@ from accounts.models import User, UserProfile
 import random
 from .forms import QuestionBankForm, MultipleChoiceQuestionForm, McqOptionForm, TrueOptionForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+def dashboard(request):
+    total=TotalPaper.objects.all()
+    return render(request, 'home.html', {'total':total})
 
-def home(request):
+@login_required(login_url="accounts/login")
+def paper(request):
     if request.method=="POST":
         grade=request.POST['grade']
         subject=request.POST['subject']
@@ -28,13 +33,13 @@ def home(request):
         total=TotalPaper.objects.all()
         user_id=request.user.id
         user=UserProfile.objects.filter(user_id=user_id)
-        return render(request, 'paper.html', {'qbs':qbs, 'qbl':qbl, 'user':user})
+        return render(request, 'paperdm.html', {'qbs':qbs, 'qbl':qbl, 'user':user})
     else:
         total=TotalPaper.objects.all()
         return render(request, 'home.html', {'total':total})
 
 
-    
+@login_required(login_url="accounts/login")
 def addquestion(request):
     if request.method=="POST":
         form=QuestionBankForm(request.POST)
@@ -42,23 +47,37 @@ def addquestion(request):
             form.save()
             messages.info(request, 'Question successfully added')
             qb=QuestionBank.objects.filter(approved=0)
-            return render(request, 'addquestion.html', {'form':form, 'qb':qb})
+            q=QuestionBank.objects.all()
+            return render(request, 'addquestion.html', {'form':form, 'qb':qb, 'q':q})
         else:
             form=QuestionBankForm()
-            return render(request, 'addquestion.html', {'form':form})
+            messages.info(request, "Question already exists in database")
+            qb=QuestionBank.objects.filter(approved=0)
+            q=QuestionBank.objects.all()
+            return render(request, 'addquestion.html', {'form':form, 'qb':qb, 'q':q})
     else:
         form=QuestionBankForm()
         qb=QuestionBank.objects.filter(approved=0)
-        return render(request, 'addquestion.html', {'form':form, 'qb':qb})
-
+        q=QuestionBank.objects.all()
+        return render(request, 'addquestion.html', {'form':form, 'qb':qb, 'q':q})
+    
+@login_required(login_url="accounts/login")
 def approve(request, id):
     question=QuestionBank.objects.get(id=id)
+    mcqs=MultipleChoiceQuestion.objects.get(id=id)
     QuestionBank.objects.filter(id=id).update(approved=1)
+    MultipleChoiceQuestion.objects.filter(id=id).update(approved=1)
     form=QuestionBankForm()
     qb=QuestionBank.objects.filter(approved=0)
     return redirect('questionpaper:addquestion')
 
+@login_required(login_url="accounts/login")
+def approvemcq(request, id):
+    TrueOption.objects.get(id=id)
+    TrueOption.objects.filter(id=id).update(approved=1)
+    return redirect('questionpaper:addmcq')
 
+@login_required(login_url="accounts/login")
 def addmcq(request):
     if request.method=="POST":
         mcq_form=MultipleChoiceQuestionForm(request.POST)
@@ -73,19 +92,21 @@ def addmcq(request):
             true_option.trueoption=mcq_options
             true_option.save()
             messages.info(request, 'Question successfully added')
-            mcqs=TrueOption.objects.all()
+            mcqs=TrueOption.objects.filter(approved=0)
             return render(request, 'addmcq.html', {'mcq_form':mcq_form, 'o_form':o_form, 't_form':t_form, 'mcqs':mcqs})
         else:
             mcq_form=MultipleChoiceQuestionForm()
             o_form=McqOptionForm()
             t_form=TrueOptionForm()
+            messages.info(request, "Question already exists in database")
             return render(request, 'addmcq.html', {'mcq_form':mcq_form, 'o_form':o_form, 't_form':t_form})
     else:
         mcq_form=MultipleChoiceQuestionForm()
         o_form=McqOptionForm()
         t_form=TrueOptionForm()
-        mcqs=TrueOption.objects.all()
-        return render(request, 'addmcq.html', {'mcq_form':mcq_form, 'o_form':o_form, 't_form':t_form, 'mcqs':mcqs})
+        mcqs=TrueOption.objects.filter(approved=0)
+        m=MultipleChoiceQuestion.objects.all()
+        return render(request, 'addmcq.html', {'mcq_form':mcq_form, 'o_form':o_form, 't_form':t_form, 'mcqs':mcqs, 'm':m})
 
 
 

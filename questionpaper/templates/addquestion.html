@@ -3,15 +3,34 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<style>
+    li {
+        list-style: none;
+    }
+</style>
 <div class="content">
+   
 <form action="addquestion" method="post">
     {% csrf_token %}
-
-    {{form|crispy}}
-    <p>Fields marked <b>*</b> are required</p>
+<table class="table">
+    {{form.as_table}}
+    <script>
+        $(function () {
+            var availableTags = [
+                {% for i in qb %}
+            "{{i.question_eng}}",
+            {% endfor %}
+    ];
+        $("#tags").autocomplete({
+            source: availableTags
+        });
+    } );
+    </script>
+</table>
+    
     <button type="submit" class="btn btn-info">Add Question</button>
 </form>
-<p>
+<p style="color:red;">
 {% for msg in messages %}
 {{msg}}
 {% endfor %}

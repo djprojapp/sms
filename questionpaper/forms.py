@@ -13,12 +13,11 @@ class QuestionBankForm(forms.ModelForm):
             'grade':'Class',
 
         }
-        exclude=('approved',)
+        exclude=('approved',)  
 
     def __init__(self, *args, **kwargs):
-        super(QuestionBankForm, self).__init__(*args, **kwargs)
-        
-        #self.fields['question_urd'].required=False
+        super().__init__(*args, **kwargs)
+        self.fields['question_eng'].widget.attrs.update({'id': 'tags'})
 
 class MultipleChoiceQuestionForm(forms.ModelForm):
 
@@ -28,7 +27,12 @@ class MultipleChoiceQuestionForm(forms.ModelForm):
         labels={
             'mcq':'Multiple Choice Question(MCQ)',
         }
+        exclude=('approved',)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['mcq'].widget.attrs.update({'id': 'tags'})
+        
 class McqOptionForm(forms.ModelForm):
 
     class Meta:

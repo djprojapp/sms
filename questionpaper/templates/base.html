@@ -140,7 +140,7 @@ font-family: 'Jameel Noori Nastaleeq' ,'Open Sans', sans-serif;
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{% url 'questionpaper:home' %}" class="nav-link">Home</a>
+        <a href="{% url 'questionpaper:dashboard' %}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="javascript:alert('Please contact developers for Help');" class="nav-link">Contact</a>
@@ -172,7 +172,7 @@ font-family: 'Jameel Noori Nastaleeq' ,'Open Sans', sans-serif;
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="{% url 'questionpaper:home' %}" class="brand-link">
+  <a href="{% url 'questionpaper:dashboard' %}" class="brand-link">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Q_magazine_logo.svg/1200px-Q_magazine_logo.svg.png" alt="Logo" class="brand-image img-circle elevation-3"
          style="opacity: .8">
     <span class="brand-text font-weight-light">Question Bank</span>
@@ -207,7 +207,7 @@ font-family: 'Jameel Noori Nastaleeq' ,'Open Sans', sans-serif;
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
 		<li id="dashboard" class="nav-item has-treeview">
-          <a href="{% url 'questionpaper:home' %}" class="nav-link">
+          <a href="{% url 'questionpaper:dashboard' %}" class="nav-link">
             <i class="nav-icon fa fa-dashboard"></i>
             <p>
               Dashboard
@@ -237,7 +237,7 @@ font-family: 'Jameel Noori Nastaleeq' ,'Open Sans', sans-serif;
         </li>
         {% endif %}
         <li id="add" class="nav-item has-treeview">
-          <a href="{% url 'questionpaper:home' %}" class="nav-link">
+          <a href="{% url 'questionpaper:dashboard' %}" class="nav-link">
             <i class="nav-icon fa fa-files-o"></i>
             <p>
               Generate New Paper

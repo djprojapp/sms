@@ -73,7 +73,7 @@ def logout(request):
     if request.user.is_authenticated:
         auth.logout(request)
         messages.info(request, "You are loged out")
-        return redirect('/')
+        return render(request, 'login.html')
     
 def userprofile(request):
     if request.method=="POST":
