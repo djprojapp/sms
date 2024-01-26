@@ -51,7 +51,7 @@ class MultipleChoiceQuestion(models.Model):
         ('math','Mathematics'),
         ('english','English'),
         ('pakstudy','Pakistan Study'),
-        ), default='--select--', unique=True)
+        ), default='--select--')
     grade=models.CharField(max_length=20, choices=(
         ('', '--select--'),
         ('10','10'),
@@ -61,7 +61,7 @@ class MultipleChoiceQuestion(models.Model):
         ('6','6'),
         ('5','5'),
         ), default='--select--')
-    mcq=models.CharField(max_length=200)
+    mcq=models.CharField(max_length=200, unique=True)
      
     def __str__(self):
         return self.mcq

@@ -98,7 +98,7 @@ def addmcq(request):
             mcq_form=MultipleChoiceQuestionForm()
             o_form=McqOptionForm()
             t_form=TrueOptionForm()
-            messages.info(request, "Question already exists in database")
+            mcq_form.errors
             return render(request, 'addmcq.html', {'mcq_form':mcq_form, 'o_form':o_form, 't_form':t_form})
     else:
         mcq_form=MultipleChoiceQuestionForm()
