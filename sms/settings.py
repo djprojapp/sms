@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-cl=0^e)bbj)7!2-ot71gyc-nxq%i5uxl#5=hsjxd37g=8ak6()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'eduservices.live', 'qpaper.pythonanywhere.com']
 
 
 # Application definition
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "sms.urls"

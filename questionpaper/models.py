@@ -85,3 +85,16 @@ class TrueOption(models.Model):
     def __str__(self):
         return self.true_option
 
+class Kuestion(models.Model):
+    question=models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.question
+    
+class KuestionType(models.Model):
+    kuestion=models.ForeignKey(Kuestion, on_delete=models.CASCADE)
+    short_question=models.BooleanField(default=False)
+    long_question=models.BooleanField(default=False)
+    analytical_question=models.BooleanField(default=False)
+
+    

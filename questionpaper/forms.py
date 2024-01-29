@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import QuestionBank, McqOption, MultipleChoiceQuestion, TrueOption
+from .models import QuestionBank, McqOption, MultipleChoiceQuestion, TrueOption, Kuestion, KuestionType
 
 class QuestionBankForm(forms.ModelForm):
 
@@ -50,3 +50,16 @@ class TrueOptionForm(forms.ModelForm):
     class Meta:
         model=TrueOption
         fields=['true_option']
+
+class KuestionForm(forms.ModelForm):
+
+    class Meta:
+        model=Kuestion
+        fields='__all__'
+
+class KuestionTypeForm(forms.ModelForm):
+
+    class Meta:
+        model=KuestionType
+        fields='__all__'
+        exclude=('kuestion',)

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    li {
+        list-style: none;
+    }
+</style>
+<div class="content">
+   
+<form action="addkuestion" method="post">
+    {% csrf_token %}
+<table class="table">
+    {{k_form.as_table}}
+    {{kt_form.as_table}}
+    <script>
+        $(function () {
+            var availableTags = [
+                {% for i in qb %}
+            "{{i.question_eng}}",
+            {% endfor %}
+    ];
+        $("#tags").autocomplete({
+            source: availableTags
+        });
+    } );
+    </script>
+</table>
+    
+    <button type="submit" class="btn btn-info">Add Question</button>
+</form>
+<p style="color:red;">
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+</p>
+<div class="table">
+    <table class="table table-bordered">
+        <tr><th>Question in English</th><th>Question in Urdu</th><th>Question Type</th><th>Action</th></tr>
+        {% for q in qb %}
+        <tr><td>{{q.kuestion}}</td><td style="direction:rtl; text-align:right;" class="urdufont-right">{{q.short_question}}</td><td >{{q.long_question}}</td><td><form class="d-inline" action="{% url 'questionpaper:approve' q.id %}" method="POST">{% csrf_token %}<input type="submit" value="Approve" class="btn btn-primary"> </form></td></tr>
+        {% endfor %}
+    </table>
+</div>
+</div>
+
+{% endblock %}
