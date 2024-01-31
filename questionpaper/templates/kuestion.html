@@ -14,7 +14,7 @@
     {% csrf_token %}
 <table class="table">
     {{k_form.as_table}}
-    {{kt_form.as_table}}
+    
     <script>
         $(function () {
             var availableTags = [
@@ -28,6 +28,7 @@
     } );
     </script>
 </table>
+{{kt_form|crispy}}
     
     <button type="submit" class="btn btn-info">Add Question</button>
 </form>

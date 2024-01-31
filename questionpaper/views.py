@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import QuestionBank, TotalPaper, McqOption, MultipleChoiceQuestion, TrueOption, Kuestion, KuestionType
+from .models import QuestionBank, TotalPaper, McqOption, MultipleChoiceQuestion, TrueOption, QuestionSelection
 from accounts.models import User, UserProfile
 import random
-from .forms import QuestionBankForm, MultipleChoiceQuestionForm, McqOptionForm, TrueOptionForm, KuestionForm, KuestionTypeForm
+from .forms import QuestionBankForm, MultipleChoiceQuestionForm, McqOptionForm, TrueOptionForm, QuestionSelectionForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -24,7 +24,7 @@ def paper(request):
         if len(qbs)<sz:
             sz=len(qbs)
         qbs=random.sample(qbs,sz)
-        qbl=random.sample(qbl,2)
+        qbl=random.sample(qbl,sz)
         tp=TotalPaper.objects.filter(id=1)
         for i in tp:
             pprgen=i.total
@@ -43,30 +43,36 @@ def paper(request):
 def addquestion(request):
     if request.method=="POST":
         form=QuestionBankForm(request.POST)
-        if form.is_valid():
-            form.save()
+        s_form=QuestionSelectionForm(request.POST)
+        if form.is_valid() and s_form.is_valid():
+            question_selection=s_form.save()
+            question=form.save(commit=False)
+            question.question_selection=question_selection
+            question.save()
             messages.info(request, 'Question successfully added')
             qb=QuestionBank.objects.filter(approved=0)
             q=QuestionBank.objects.all()
-            return render(request, 'addquestion.html', {'form':form, 'qb':qb, 'q':q})
+            s_form=QuestionSelectionForm()
+            return render(request, 'addquestion.html', {'form':form, 's_form':s_form, 'qb':qb, 'q':q})
         else:
             form=QuestionBankForm()
             messages.info(request, "Question already exists in database")
             qb=QuestionBank.objects.filter(approved=0)
             q=QuestionBank.objects.all()
-            return render(request, 'addquestion.html', {'form':form, 'qb':qb, 'q':q})
+            s_form=QuestionSelectionForm()
+            return render(request, 'addquestion.html', {'form':form, 's_form':s_form, 'qb':qb, 'q':q})
     else:
         form=QuestionBankForm()
-        qb=QuestionBank.objects.filter(approved=0)
+        question_selection=QuestionSelection.objects.all()
+        qb=QuestionBank.objects.filter(approved=0).select_related("question_selection")
         q=QuestionBank.objects.all()
-        return render(request, 'addquestion.html', {'form':form, 'qb':qb, 'q':q})
+        s_form=QuestionSelectionForm()
+        return render(request, 'addquestion.html', {'form':form, 's_form':s_form, 'qb':qb, 'q':q})
     
 @login_required(login_url="accounts/login")
 def approve(request, id):
     question=QuestionBank.objects.get(id=id)
-    mcqs=MultipleChoiceQuestion.objects.get(id=id)
     QuestionBank.objects.filter(id=id).update(approved=1)
-    MultipleChoiceQuestion.objects.filter(id=id).update(approved=1)
     form=QuestionBankForm()
     qb=QuestionBank.objects.filter(approved=0)
     return redirect('questionpaper:addquestion')
@@ -108,31 +114,6 @@ def addmcq(request):
         mcqs=TrueOption.objects.filter(approved=0)
         m=MultipleChoiceQuestion.objects.all()
         return render(request, 'addmcq.html', {'mcq_form':mcq_form, 'o_form':o_form, 't_form':t_form, 'mcqs':mcqs, 'm':m})
-
-@login_required(login_url="accounts/login")
-def addkuestion(request):
-    if request.method=="POST":
-        k_form=KuestionForm(request.POST)
-        kt_form=KuestionTypeForm(request.POST)
-        if k_form.is_valid() and kt_form.is_valid():
-            kuestion=k_form.save()
-            kuestiontypes=kt_form.save(commit=False)
-            kuestiontypes.kuestion=kuestion
-            kuestiontypes.save()
-            messages.info(request, 'Question successfully added')
-            qb=KuestionType.objects.all()
-            return render(request, 'kuestion.html', {'k_form':k_form, 'kt_form':kt_form, 'qb':qb})
-        else:
-            k_form=KuestionForm()
-            kt_form=KuestionTypeForm()
-            messages.info(request, 'Question already exists in database')
-            qb=KuestionType.objects.all()
-            return render(request, 'kuestion.html', {'k_form':k_form, 'kt_form':kt_form, 'qb':qb})
-    else:
-        k_form=KuestionForm()
-        kt_form=KuestionTypeForm()
-        qb=KuestionType.objects.all()
-        return render(request, 'kuestion.html', {'k_form':k_form, 'kt_form':kt_form, 'qb':qb})
 
 
 

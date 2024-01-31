@@ -11,6 +11,5 @@ urlpatterns=[
     path('approve/<int:id>', views.approve, name="approve"),
     path('approvemcq/<int:id>', views.approvemcq, name="approvemcq"),
     path('addmcq', views.addmcq, name="addmcq"),
-    path('addkuestion', views.addkuestion, name="addkuestion"),
     
 ]

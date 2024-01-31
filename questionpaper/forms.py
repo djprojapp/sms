@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import QuestionBank, McqOption, MultipleChoiceQuestion, TrueOption, Kuestion, KuestionType
+from .models import QuestionBank, McqOption, MultipleChoiceQuestion, TrueOption, QuestionSelection
 
 class QuestionBankForm(forms.ModelForm):
 
@@ -13,7 +13,8 @@ class QuestionBankForm(forms.ModelForm):
             'grade':'Class',
 
         }
-        exclude=('approved',)  
+        exclude=('approved','question_selection', 'question_type',)  
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,15 +52,24 @@ class TrueOptionForm(forms.ModelForm):
         model=TrueOption
         fields=['true_option']
 
-class KuestionForm(forms.ModelForm):
+class QuestionSelectionForm(forms.ModelForm):
 
     class Meta:
-        model=Kuestion
+        model=QuestionSelection
         fields='__all__'
+        labels = {
+        'short': 'Short Question?',
+        'long': 'Long Question?',
+        'analytical': 'Analytical Question?',
+        'i2018': 'Part I 2018',
+        'ii2018': 'Part II 2018',
+        'i2019': 'Part I 2019',
+        'ii2019': 'Part II 2019',
+        'i2020': 'Part I 2020',
+        'ii2020': 'Part II 2020',
+        'i2021': 'Part I 2021',
+        'ii2021': 'Part II 2021',
+        'i2022': 'Part I 2022',
+        'ii2022': 'Part II 2022',
 
-class KuestionTypeForm(forms.ModelForm):
-
-    class Meta:
-        model=KuestionType
-        fields='__all__'
-        exclude=('kuestion',)
+    }

@@ -14,6 +14,7 @@
     {% csrf_token %}
 <table class="table">
     {{form.as_table}}
+    {{s_form.as_table}}
     <script>
         $(function () {
             var availableTags = [
@@ -27,7 +28,6 @@
     } );
     </script>
 </table>
-    
     <button type="submit" class="btn btn-info">Add Question</button>
 </form>
 <p style="color:red;">
@@ -39,7 +39,7 @@
     <table class="table table-bordered">
         <tr><th>Question in English</th><th>Question in Urdu</th><th>Question Type</th><th>Action</th></tr>
         {% for q in qb %}
-        <tr><td>{{q.question_eng}}</td><td style="direction:rtl; text-align:right;" class="urdufont-right">{{q.question_urd}}</td><td >{{q.question_type}}</td><td><form class="d-inline" action="{% url 'questionpaper:approve' q.id %}" method="POST">{% csrf_token %}<input type="submit" value="Approve" class="btn btn-primary"> </form></td></tr>
+        <tr><td>{{q.question_eng}}</td><td style="direction:rtl; text-align:right;" class="urdufont-right">{{q.question_urd}}</td><td >{% if q.question_selection.long == True %}long{% else %} Short{% endif %}</td><td><form class="d-inline" action="{% url 'questionpaper:approve' q.id %}" method="POST">{% csrf_token %}<input type="submit" value="Approve" class="btn btn-primary"> </form></td></tr>
         {% endfor %}
     </table>
 </div>
