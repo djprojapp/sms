@@ -7,7 +7,6 @@ from .forms import QuestionBankForm, MultipleChoiceQuestionForm, McqOptionForm, 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-
 # Create your views here.
 def dashboard(request):
     total=TotalPaper.objects.all()
@@ -18,13 +17,23 @@ def paper(request):
     if request.method=="POST":
         grade=request.POST['grade']
         subject=request.POST['subject']
-        qbs=list(QuestionBank.objects.all().filter(grade=grade).filter(subject=subject).filter(question_type='short'))
-        qbl=list(QuestionBank.objects.all().filter(grade=grade).filter(subject=subject).filter(question_type='long'))
-        sz=100
-        if len(qbs)<sz:
-            sz=len(qbs)
-        qbs=random.sample(qbs,sz)
-        qbl=random.sample(qbl,sz)
+        paper_type=request.POST['paper_type']
+        qbs=list(QuestionBank.objects.all().filter(grade=grade).filter(subject=subject).filter(question_selection__short=1))
+        qbl=list(QuestionBank.objects.all().filter(grade=grade).filter(subject=subject).filter(question_selection__long=1))
+        mcq=list(McqOption.objects.all().select_related('options'))
+        sz1=20
+        sz2=6
+        sz3=20
+        if len(qbs)<sz1:
+            sz1=len(qbs)
+        if len(qbl)<sz2:
+            sz2=len(qbl)
+        if len(mcq)<sz3:
+            sz3=len(mcq)
+
+        qbs=random.sample(qbs,sz1)
+        qbl=random.sample(qbl,sz2)
+        mcq=random.sample(mcq,sz3)
         tp=TotalPaper.objects.filter(id=1)
         for i in tp:
             pprgen=i.total
@@ -33,7 +42,10 @@ def paper(request):
         total=TotalPaper.objects.all()
         user_id=request.user.id
         user=UserProfile.objects.filter(user_id=user_id)
-        return render(request, 'paperdm.html', {'qbs':qbs, 'qbl':qbl, 'user':user})
+        if paper_type=="subjective":
+            return render(request, 'paper.html', {'qbs':qbs, 'qbl':qbl, 'user':user})
+        else:
+            return render(request, 'objective.html', {'mcq':mcq, 'user':user, 'subject':subject, 'grade':grade})
     else:
         total=TotalPaper.objects.all()
         return render(request, 'home.html', {'total':total})

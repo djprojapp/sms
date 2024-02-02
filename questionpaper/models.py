@@ -23,10 +23,6 @@ class QuestionSelection(models.Model):
 class QuestionBank(models.Model):
     question_eng=models.CharField(max_length=200,  unique=True)
     question_urd=models.CharField(max_length=200)
-    question_type=models.CharField(max_length=20, choices=(
-        ('', '--select--'),
-        ('short', 'Short'),
-    ))
     question_selection=models.ForeignKey(QuestionSelection, on_delete=models.DO_NOTHING)
     subject=models.CharField(max_length=20, choices=(
         ('', '--select--'),
@@ -92,10 +88,24 @@ class MultipleChoiceQuestion(models.Model):
         ('6','6'),
         ('5','5'),
         ), default='--select--')
-    mcq=models.CharField(max_length=200, unique=True)
+    chapter=models.CharField(max_length=20, choices=(
+        ('', '--select--'),
+        ('1','Chapter-1'),
+        ('2','Chapter-2'),
+        ('3','Chapter-3'),
+        ('4','Chapter-4'),
+        ('5','Chapter-5'),
+        ('6','Chapter-6'),
+        ('7','Chapter-7'),
+        ('8','Chapter-8'),
+        ('9','Chapter-9'),
+        ('10','Chapter-10'),
+        ))
+    mcq_eng=models.CharField(max_length=200, unique=True)
+    mcq_urd=models.CharField(max_length=200, unique=True, null=True)
      
     def __str__(self):
-        return self.mcq
+        return self.mcq_eng
     
 
 class McqOption(models.Model):
@@ -104,6 +114,10 @@ class McqOption(models.Model):
     op_b=models.CharField(max_length=100)
     op_c=models.CharField(max_length=100)
     op_d=models.CharField(max_length=100)
+    op_au=models.CharField(max_length=100, null=True, blank=True)
+    op_bu=models.CharField(max_length=100, null=True, blank=True)
+    op_cu=models.CharField(max_length=100, null=True, blank=True)
+    op_du=models.CharField(max_length=100, null=True, blank=True)
     
 
     def __str__(self):

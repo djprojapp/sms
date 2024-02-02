@@ -26,24 +26,29 @@ class MultipleChoiceQuestionForm(forms.ModelForm):
         model=MultipleChoiceQuestion
         fields='__all__'
         labels={
-            'mcq':'Multiple Choice Question(MCQ)',
+            'mcq_eng':'Multiple Choice Question(MCQ)-English',
+            'mcq_urd':'Multiple Choice Question(MCQ)-Urdu',
         }
         exclude=('approved',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['mcq'].widget.attrs.update({'id': 'tags'})
+        self.fields['mcq_eng'].widget.attrs.update({'id': 'tags'})
         
 class McqOptionForm(forms.ModelForm):
 
     class Meta:
         model=McqOption
-        fields=['op_a', 'op_b', 'op_c', 'op_d']
+        fields=['op_a','op_au', 'op_b', 'op_bu', 'op_c', 'op_cu', 'op_d', 'op_du']
         labels = {
-        'op_a': 'Option A',
-        'op_b': 'Option B',
-        'op_c': 'Option C',
-        'op_d': 'Option D',
+        'op_a': 'Option A-English',
+        'op_b': 'Option B-English',
+        'op_c': 'Option C-English',
+        'op_d': 'Option D-English',
+        'op_au': 'Option A-urdu',
+        'op_bu': 'Option B-urdu',
+        'op_cu': 'Option C-urdu',
+        'op_du': 'Option D-urdu',
     }
 
 class TrueOptionForm(forms.ModelForm):

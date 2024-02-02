@@ -33,10 +33,10 @@
 {% endfor %}
 </p>
 <div class="table">
-    <table class="table" style="width:100%;">
+    <table class="table" style="width:100%;" style="direction:rtl; text-align:right;" class="urdufont-right">
         <tr><th>MCQ</th><th>Option A</th><th>Option B</th><th>Option C</th><th>Option D</th><th>True Option</th><th>Action</th></tr>
         {% for q in mcqs %}
-        <tr><td>{{q.trueoption.options.mcq}}</td><td>{{q.trueoption.op_a}}</td><td>{{q.trueoption.op_b}}</td><td>{{q.trueoption.op_c}}</td><td>{{q.trueoption.op_d}}</td><td>{{q.trueoption}}</td><td><form class="d-inline" action="{% url 'questionpaper:approvemcq' q.id %}" method="POST">{% csrf_token %}<input type="submit" value="Approve" class="btn btn-primary"> </form></td></tr>
+        <tr><td>{{q.trueoption.options.mcq_eng}}</td><td>{{q.trueoption.op_a}} ({{q.trueoption.op_au}})</td><td>{{q.trueoption.op_b}}</td><td>{{q.trueoption.op_c}}</td><td>{{q.trueoption.op_d}}</td><td>{{q.trueoption}}</td><td><form class="d-inline" action="{% url 'questionpaper:approvemcq' q.id %}" method="POST">{% csrf_token %}<input type="submit" value="Approve" class="btn btn-primary"> </form></td></tr>
         {% endfor %}
     </table>
 </div>

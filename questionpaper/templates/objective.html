@@ -105,7 +105,7 @@
 							
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 heading" style="text-align:center; font-weight:bold">
 
-								Physics 9
+								{{subject|title}}&nbsp;&nbsp;&nbsp;{{grade}}
 							</div>
 
 							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
@@ -120,7 +120,7 @@
 									<div class="row">
 
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="font-size:18px; font-weight:bold; text-align: center;">
-													Time Allowed					Total Marks
+													Time Allowed	20 minutes				Total Marks    15
 										</div>
 
 									</div>
@@ -138,9 +138,9 @@
 
 									</div>
 
-									<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10" style="border-bottom:#000 solid 2px">	
+									<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10" style="border-bottom:#6257df solid 2px">	
 
-										xxxxxx
+										{% for i in user %}{{i.institute}}{% endfor %}
 
 									</div>
 
@@ -216,14 +216,14 @@
 
 				<div class="container">
 
-                	<hr><div class="papyertype">SUBJECTIVE PART</div>
+                	<hr><div class="papyertype">OBJECTIVE PART</div>
 		<table style="width:100%">
 
 		<div class="row">
 
 			<div class="col-lg-12 col-sm-12">                         
 
-			  <label for="group_title_en" class="col-sm-12 control-label" >Question No:1 Write answers of any Five questions.</label>
+			 
 
 			  <div style="font-weight:bold"></div>
 
@@ -240,20 +240,27 @@
 				   
 					<table width="100%" style="margin-top:10px;" >
 
-						{% for i in qbs %} 
+					  
 					  <tr>
-						<td>{{ forloop.counter }}. &nbsp; </td>
 
-						<td>
-							{{i.question_eng}}
+						<td style="font-weight:bold">
 
-				</td><td style="direction:rtl; text-align: right;" class="urdufont-right"><ol>
-								                              
-							
-								{{i.question_urd}}</td>
+
+<ol>
+	{% for i in qbs %}                               
+<li type="a">
+	{{i.question_eng}}<br><span style="direction:rtl; text-align: right;" class="urdufont-right"> {{i.question_urd}}</span></li>
+	{% endfor %} 
+</ol>
+							</td><td style="direction:rtl; text-align: right;" class="urdufont-right"><ol>
+								{% for i in qbs %}                               
+							<li type="a">
+								{{i.question_urd}}</li>
+								{% endfor %} 
+							</ol></td>
 
 					  </tr>
-					  {% endfor %} 
+
 
 
 					  
@@ -269,7 +276,7 @@
 
 			<div class="col-lg-12 col-sm-12">                         
 
-			  <label for="group_title_en" class="col-sm-12 control-label" >Question No:  2</label>
+			  <label for="group_title_en" class="col-sm-12 control-label" >Note: Four possible answers A, B, C and D to each question are given. The choice which you think is correct, fill that circle in front of that question with Marker or Pen ink in the answer book. Cutting or filling two or more circles will result in zero mark in that question.</label>
 
 			  <div style="font-weight:bold"></div>
 
@@ -284,30 +291,23 @@
 		</table>
 
 				   
-					<table width="100%" style="margin-top:10px;" >
+        <table class="table table-borderless">
+            
+            {% for m in mcq %}
 
-					  
-					  <tr>
-
-						<td colspan="2" style="font-weight:bold">
-
-
-
-							                               
-
-							<ol>
-								{% for i in qbl %}                               
-							<li type="a">
-								{{i.question_eng}}<br><span style="direction:rtl; text-align: right;" class="urdufont-right"> {{i.question_urd}}</span></li>
-								{% endfor %} 
-							</ol>
-
-					  </tr>
-
-
-
-					  
-					</table>
+          <tr>
+        
+           <td colspan="2">{{ forloop.counter}}.{{m.options.mcq_eng}}</td><td colspan="2" style="text-align:right;">{{m.options.mcq_urd}}</td>
+        </tr>
+        <tr>
+            <td>(A)  &nbsp;&nbsp; {{m.op_a}} &nbsp;&nbsp;  {{m.op_au}}</td><td>(B) &nbsp;&nbsp;{{m.op_b}} &nbsp;&nbsp;  {{m.op_bu}}</td><td>(C) &nbsp;&nbsp;{{m.op_c}}  &nbsp;&nbsp; {{m.op_cu}}</td><td>(D) &nbsp;&nbsp;{{m.op_d}}  &nbsp;&nbsp; {{m.op_du}}</td>
+        
+          </tr>
+            
+          {% endfor %}
+        
+          
+        </table>
 
 					
 	
