@@ -101,8 +101,8 @@ class MultipleChoiceQuestion(models.Model):
         ('9','Chapter-9'),
         ('10','Chapter-10'),
         ))
-    mcq_eng=models.CharField(max_length=200, unique=True)
-    mcq_urd=models.CharField(max_length=200, unique=True, null=True)
+    mcq_eng=models.CharField(max_length=200)
+    mcq_urd=models.CharField(max_length=200)
      
     def __str__(self):
         return self.mcq_eng

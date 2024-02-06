@@ -127,7 +127,19 @@ def addmcq(request):
         m=MultipleChoiceQuestion.objects.all()
         return render(request, 'addmcq.html', {'mcq_form':mcq_form, 'o_form':o_form, 't_form':t_form, 'mcqs':mcqs, 'm':m})
 
+def view(request):
+    qbs=QuestionBank.objects.all().select_related('question_selection').filter(question_selection__short=1)
+    return render (request, 'edit.html', {'qbs':qbs})
 
-
-        
-         
+def edit(request, id):
+    QuestionBank.objects.get(id=id)
+    if request.method=="POST":
+        question_eng=request.POST['question_eng']
+        question_urd=request.POST['question_urd']
+        chapter=request.POST['chapter']
+        QuestionBank.objects.filter(id=id).update(question_eng=question_eng, question_urd=question_urd, chapter=chapter)
+        qbs=QuestionBank.objects.all().select_related('question_selection').filter(question_selection__short=1)
+        return render(request, 'edit.html', {'qbs':qbs})
+    
+def manualpaper(request):
+    pass

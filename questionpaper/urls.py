@@ -11,5 +11,7 @@ urlpatterns=[
     path('approve/<int:id>', views.approve, name="approve"),
     path('approvemcq/<int:id>', views.approvemcq, name="approvemcq"),
     path('addmcq', views.addmcq, name="addmcq"),
+    path('view', views.view, name="view"),
+    path('edit/<int:id>', views.edit, name="edit"),
     
 ]

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% for i in qbs %}
+<form action="{% url 'questionpaper:edit' i.id %}" method="POST">
+    {% csrf_token %}
+     
+    <p>
+ {{ forloop.counter }}. &nbsp;
+   
+    <input style="width:100%;" type="text" name="question_eng" value="{{i.question_eng}}" /><br/>
+    <input style="width:100%;" type="text" name="question_urd" value="{{i.question_urd}}"  /><br/>
+    <input style="width:100%;" type="text" name="chapter" value="{{i.chapter}}"  /><br/>
+    <input type="submit" value="Update"/></p>
+</form>
+  {% endfor %} 
+
+
+
+{% endblock %}

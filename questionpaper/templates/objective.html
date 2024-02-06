@@ -297,10 +297,10 @@
 
           <tr>
         
-           <td colspan="2">{{ forloop.counter}}.{{m.options.mcq_eng}}</td><td colspan="2" style="text-align:right;">{{m.options.mcq_urd}}</td>
+           <td colspan="2">{{ forloop.counter}}.&nbsp;&nbsp;{{m.options.mcq_urd}}</td><td colspan="2" style="text-align:right;" class="urdufont-right">{{m.options.mcq_eng}}</td>
         </tr>
         <tr>
-            <td>(A)  &nbsp;&nbsp; {{m.op_a}} &nbsp;&nbsp;  {{m.op_au}}</td><td>(B) &nbsp;&nbsp;{{m.op_b}} &nbsp;&nbsp;  {{m.op_bu}}</td><td>(C) &nbsp;&nbsp;{{m.op_c}}  &nbsp;&nbsp; {{m.op_cu}}</td><td>(D) &nbsp;&nbsp;{{m.op_d}}  &nbsp;&nbsp; {{m.op_du}}</td>
+            <td>(A)  &nbsp;&nbsp;{% if m.op_a == m.op_au %} {{m.op_a}}{% else %} &nbsp;&nbsp; {{m.op_a}}&nbsp;&nbsp; {{m.op_au}}{% endif %}</td><td>(B) &nbsp;&nbsp;{% if m.op_b == m.op_bu %}{{m.op_b}} {% else %}&nbsp;&nbsp; {{m.op_b}} &nbsp;&nbsp;{{m.op_bu}}{% endif %}</td><td>(C) &nbsp;&nbsp;{% if m.op_c == m.op_cu %} {{m.op_c}}{% else %} &nbsp;&nbsp; {{m.op_c}}&nbsp;&nbsp; {{m.op_cu}}{% endif %}</td><td>(D) &nbsp;&nbsp;{% if m.op_d == m.op_du %} {{m.op_d}}{% else %} &nbsp;&nbsp; {{m.op_d}}&nbsp;&nbsp; {{m.op_du}}{% endif %}</td>
         
           </tr>
             
