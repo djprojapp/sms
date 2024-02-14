@@ -20,10 +20,10 @@ def paper(request):
         paper_type=request.POST['paper_type']
         qbs=list(QuestionBank.objects.all().filter(grade=grade).filter(subject=subject).filter(question_selection__short=1))
         qbl=list(QuestionBank.objects.all().filter(grade=grade).filter(subject=subject).filter(question_selection__long=1))
-        mcq=list(McqOption.objects.all().select_related('options'))
+        mcq=list(McqOption.objects.all().filter(options__subject=subject).select_related('options'))
         sz1=20
         sz2=6
-        sz3=20
+        sz3=12
         if len(qbs)<sz1:
             sz1=len(qbs)
         if len(qbl)<sz2:
@@ -43,7 +43,7 @@ def paper(request):
         user_id=request.user.id
         user=UserProfile.objects.filter(user_id=user_id)
         if paper_type=="subjective":
-            return render(request, 'paper.html', {'qbs':qbs, 'qbl':qbl, 'user':user})
+            return render(request, 'paper.html', {'qbs':qbs, 'qbl':qbl, 'user':user, 'subject':subject, 'grade':grade})
         else:
             return render(request, 'objective.html', {'mcq':mcq, 'user':user, 'subject':subject, 'grade':grade})
     else:
@@ -140,6 +140,23 @@ def edit(request, id):
         QuestionBank.objects.filter(id=id).update(question_eng=question_eng, question_urd=question_urd, chapter=chapter)
         qbs=QuestionBank.objects.all().select_related('question_selection').filter(question_selection__short=1)
         return render(request, 'edit.html', {'qbs':qbs})
-    
+
+@login_required(login_url="accounts/login")  
 def manualpaper(request):
-    pass
+    if request.method=='POST':
+        subject=request.POST['subject']
+        grade=request.POST['grade']
+        chapter=request.POST['chapter']
+        question_type=request.POST['question_type']
+        sz=request.POST['sz']
+        qbs=list(QuestionBank.objects.all().filter(grade=grade).filter(subject=subject).filter(chapter=chapter).filter(question_selection__short=1))
+       
+        if len(qbs)<int(sz):
+            sz=len(qbs)
+
+        qbs=random.sample(qbs,int(sz))
+        user_id=request.user.id
+        user=UserProfile.objects.filter(user_id=1)
+        return render(request, 'manualpaper.html', {'qbs':qbs, 'user':user})
+    else:
+        return render(request, 'manual.html')

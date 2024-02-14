@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% for i in qbs %}
+
 <form action="{% url 'questionpaper:edit' i.id %}" method="POST">
     {% csrf_token %}
      

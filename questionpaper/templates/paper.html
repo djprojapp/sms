@@ -223,7 +223,7 @@
 
 			<div class="col-lg-12 col-sm-12">                         
 
-			  <label for="group_title_en" class="col-sm-12 control-label" >Question No:1 Write answers of any Five questions.</label>
+			  <label for="group_title_en" class="col-sm-12 control-label" >Q. No:1 Write answers of any Five questions.</label>
 
 			  <div style="font-weight:bold"></div>
 
@@ -247,10 +247,10 @@
 						<td>
 							{{i.question_eng}}
 
-				</td><td style="direction:rtl; text-align: right;" class="urdufont-right"><ol>
+				</td><td style="direction:rtl; text-align: right;" class="urdufont-right">
 								                              
 							
-								{{i.question_urd}}</td>
+								{{i.question_urd}}</td><td>&nbsp;.{{ forloop.counter }}</td>
 
 					  </tr>
 					  {% endfor %} 
@@ -287,24 +287,20 @@
 					<table width="100%" style="margin-top:10px;" >
 
 					  
-					  <tr>
-
-						<td colspan="2" style="font-weight:bold">
-
-
-
-							                               
-
-							<ol>
-								{% for i in qbl %}                               
-							<li type="a">
-								<p style="margin-bottom: 0em; display:inline;">{{i.question_eng}}</p></li> <p style="direction:rtl; text-align: right;" class="urdufont-right"> {{i.question_urd}}</p>
-								{% endfor %} 
-							</ol>
-
-					  </tr>
-
-
+						{% for i in qbl %} 
+						<tr>
+						  <td>{{ forloop.counter }}. &nbsp; </td>
+  
+						  <td>
+							  {{i.question_eng}}
+  
+				  </td><td style="direction:rtl; text-align: right;" class="urdufont-right">
+																
+							  
+								  {{i.question_urd}}</td><td>&nbsp;.{{ forloop.counter }}</td>
+  
+						</tr>
+						{% endfor %} 
 
 					  
 					</table>

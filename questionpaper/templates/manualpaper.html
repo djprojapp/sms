@@ -105,7 +105,7 @@
 							
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 heading" style="text-align:center; font-weight:bold">
 
-								{{subject|title}}&nbsp;&nbsp;&nbsp;{{grade}}
+								Physics 9
 							</div>
 
 							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
@@ -120,7 +120,7 @@
 									<div class="row">
 
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="font-size:18px; font-weight:bold; text-align: center;">
-													Time Allowed	20 minutes				Total Marks    15
+													Time Allowed					Total Marks
 										</div>
 
 									</div>
@@ -138,9 +138,9 @@
 
 									</div>
 
-									<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10" style="border-bottom:#6257df solid 2px">	
+									<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10" style="border-bottom:#000 solid 2px">	
 
-										{% for i in user %}{{i.institute}}{% endfor %}
+										xxxxxx
 
 									</div>
 
@@ -216,14 +216,60 @@
 
 				<div class="container">
 
-                	<hr><div class="papyertype">OBJECTIVE PART</div>
+                	<hr><div class="papyertype">SUBJECTIVE PART</div>
 		<table style="width:100%">
 
 		<div class="row">
 
 			<div class="col-lg-12 col-sm-12">                         
 
-			 
+			  <label for="group_title_en" class="col-sm-12 control-label" >Q. No. 1. Write answers of any Five questions.</label>
+
+			  <div style="font-weight:bold"></div>
+
+			</div>
+
+		 </div>
+
+					
+
+
+
+		</table>
+
+				   
+					<table width="100%" style="margin-top:10px;" >
+
+						{% for i in qbs %} 
+					  <tr>
+						<td>{{ forloop.counter|stringformat:"a"  }}.</td>
+
+						<td>
+							{{i.question_eng}}
+
+				</td><td style="direction:rtl; text-align: right;" class="urdufont-right">
+								                              
+							
+								{{i.question_urd}}</td><td>&nbsp;.{{ forloop.counter }}</td>
+
+					  </tr>
+					  {% endfor %} 
+
+
+					  
+					</table>
+
+					
+			
+
+					
+		<table style="width:100%">
+
+		<div class="row">
+
+			<div class="col-lg-12 col-sm-12">                         
+
+			  <label for="group_title_en" class="col-sm-12 control-label" >Question No:  2</label>
 
 			  <div style="font-weight:bold"></div>
 
@@ -243,21 +289,18 @@
 					  
 					  <tr>
 
-						<td style="font-weight:bold">
+						<td colspan="2" style="font-weight:bold">
 
 
-<ol>
-	{% for i in qbs %}                               
-<li type="a">
-	{{i.question_eng}}<br><span style="direction:rtl; text-align: right;" class="urdufont-right"> {{i.question_urd}}</span></li>
-	{% endfor %} 
-</ol>
-							</td><td style="direction:rtl; text-align: right;" class="urdufont-right"><ol>
-								{% for i in qbs %}                               
+
+							                               
+
+							<ol>
+								{% for i in qbl %}                               
 							<li type="a">
-								{{i.question_urd}}</li>
+								<p style="margin-bottom: 0em; margin-top: 0em;">{{i.question_eng}}</p></li> <p style="direction:rtl; text-align: right;" class="urdufont-right"> {{i.question_urd}}</p>
 								{% endfor %} 
-							</ol></td>
+							</ol>
 
 					  </tr>
 
@@ -266,54 +309,6 @@
 					  
 					</table>
 
-					
-			
-
-					
-		<table style="width:100%">
-
-		<div class="row">
-
-			<div class="col-lg-12 col-sm-12">                         
-
-			  <label for="group_title_en" class="col-sm-12 control-label" >Note: Four possible answers A, B, C and D to each question are given. The choice which you think is correct, fill that circle in front of that question with Marker or Pen ink in the answer book. Cutting or filling two or more circles will result in zero mark in that question.</label>
-
-			  <div style="font-weight:bold"></div>
-
-			</div>
-
-		 </div>
-
-					
-
-
-
-		</table>
-
-		{% for m in mcq %}	   
-        <table class="table table-borderless" style="width: 100%;border-collapse:collapse;margin-top:0;margin-bottom:0;">
-			
-				<tr style="height:0;">
-					<td style="width: 5%;">{{ forloop.counter }}.&nbsp;&nbsp;</td>
-					<td style="width: 45%;">{{ m.options.mcq_eng }}</td>
-					<td style="text-align: right; width: 45%;" class="urdufont-right">{{ m.options.mcq_urd }}</td>
-					<td style="width: 5%;">&nbsp;&nbsp; .{{ forloop.counter }}</td>
-				</tr>
-				
-		</table>
-		<table class="table table-borderless" style="width: 100%;border-collapse:collapse;margin-top:0;margin-bottom:0;">
-			
-				<tr class="urdufont-right" style="text-align: center;height:0;">
-					<td style="width: 25%;">(A) &nbsp;&nbsp;{% if m.op_a == m.op_au %} {{ m.op_a }}{% else %}{{ m.op_a }}<br>{{ m.op_au }}{% endif %}</td>
-					<td style="width: 25%;">(B) &nbsp;&nbsp;{% if m.op_b == m.op_bu %}{{ m.op_b }}{% else %}{{ m.op_b }}<br>{{ m.op_bu }}{% endif %}</td>
-					<td style="width: 25%;">(C) &nbsp;&nbsp;{% if m.op_c == m.op_cu %} {{ m.op_c }}{% else %}{{ m.op_c }}<br>{{ m.op_cu }}{% endif %}</td>
-					<td style="width: 25%;">(D) &nbsp;&nbsp;{% if m.op_d == m.op_du %} {{ m.op_d }}{% else %}{{ m.op_d }}<br>{{ m.op_du }}{% endif %}</td>
-				</tr>
-			
-		</table>
-		{% empty %}
-		<h1>Coming Soon</h1>
-		{% endfor %}
 					
 	
 

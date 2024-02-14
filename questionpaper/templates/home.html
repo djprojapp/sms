@@ -9,8 +9,8 @@
     <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark">{% if user.is_authenticated %} <b>{{user.userprofile.institute}} </b>{% endif %}  Dashboard</h1>
+            <div class="col-sm-12">
+              <h1 class="m-0 text-dark" style="text-align:center;">{% if user.is_authenticated %} <b><img src="{{user.userprofile.img.url}}">{{user.userprofile.institute}} </b>{% endif %}</h1>
             </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -24,7 +24,7 @@
           <div class="col-12">
           <div class="info-box">  
               <div class="info-box-content" style="font-size: 14px; font-weight: normal;">				  
-              Welcome to Question Bank  ,<br />Online              </div>
+             <h1>Welcome to Question Bank</h1><h2> Online  Question Paper Preparation Free Service</h2>Following Subjects' Question Bank available <br> <ul><li>Physics</li><li>Chemistry</li><li>Biology</li></ul>           </div>
 			  <!--<div class="row"><h3><a href="https://drive.google.com/drive/folders/1REeHrElNX_a9XxF84vLTtyFULwLBJEax" target="_blank">Click here to Download Grade 1 & 2 and Grade 3 to 8 all Islamiat Nazra Papers</a></h3></div>-->
               <!-- /.info-box-content -->
             </div>           
@@ -66,23 +66,13 @@
                     <table class="table table-borderless bg-success" style="width:50%">
                         <tr><td>Class</td><td><select type="text" name="grade" required>
                             <option value="">--select--</option>
-                            <option value="10">10</option>
                             <option value="9">9</option>
-                            <option value="8">8</option>
-                            <option value="7">7</option>
-                            <option value="6">6</option>
-                            <option value="5">5</option>
                         </select></td></tr>
                         <tr><td>Subject</td><td><select type="text" name="subject" required>
                             <option value="">--select--</option>
                             <option value="physics">Physics</option>
                             <option value="chemistry">Chemistry</option>
                             <option value="biology">Biology</option>
-                            <option value="mathematics">Mathematics</option>
-                            <option value="urdu">Urdu</option>
-                            <option value="english">English</option>
-                            <option value="islamiyat">Islamiyat</option>
-                            <option value="pakstudy">Pak Study</option>
                         </select></td></tr>
                         <tr><td>Paper Type</td><td><select type="text" name="paper_type" required>
                           <option value="">--select--</option>
